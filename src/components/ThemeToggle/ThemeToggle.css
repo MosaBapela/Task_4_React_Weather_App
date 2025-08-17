@@ -1,0 +1,65 @@
+.theme-toggle {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  border: 3px solid var(--card-border);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px var(--shadow-color);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle:hover::before {
+  opacity: 1;
+  animation: togglePulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes togglePulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.theme-toggle:hover {
+  transform: scale(1.15) translateY(-3px) rotate(15deg);
+  box-shadow: 0 15px 35px var(--shadow-color);
+  border-color: var(--accent-color);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+}
+
+.theme-toggle:active {
+  transform: scale(0.95) rotate(-5deg);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+/* Add special glow effect for dark mode */
+[data-theme="dark"] .theme-toggle {
+  box-shadow: 
+    0 10px 25px rgba(56, 178, 172, 0.3),
+    0 0 20px rgba(56, 178, 172, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  box-shadow: 
+    0 15px 35px rgba(56, 178, 172, 0.4),
+    0 0 30px rgba(56, 178, 172, 0.2);
+}
