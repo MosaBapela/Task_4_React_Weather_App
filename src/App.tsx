@@ -74,7 +74,7 @@ const WeatherApp: React.FC = () => {
       
       <main className="app-main">
         <div className="search-section">
-          <LocationSearch onLocationSelect={(lat, lon, city) => setCurrentLocation(city)} />
+          <LocationSearch onLocationSelect={(_lat, _lon, city) => setCurrentLocation(city)} />
         </div>
         
         {error && (
