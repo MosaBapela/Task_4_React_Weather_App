@@ -6,7 +6,7 @@
  */
 
 // Placeholder for your API key. Replace with your actual key.
-const API_KEY = "1f509593c3f8a5d43ffc6e5cd60af2b8";
+const API_KEY = "54d5aeff17af811f5ff3c152373f2183";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 const GEO_URL = "https://api.openweathermap.org/geo/1.0";
 
@@ -92,6 +92,28 @@ export const getCurrentWeather = async (location: string, unit: 'metric' | 'impe
 };
 
 /**
+ * Fetches current weather data by geographic coordinates.
+ */
+export const getCurrentWeatherByCoords = async (
+  lat: number,
+  lon: number,
+  unit: 'metric' | 'imperial'
+): Promise<CurrentWeatherData | null> => {
+  const url = `${BASE_URL}/weather?lat=${lat}&lon=${lon}&units=${unit}&appid=${API_KEY}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch current weather by coords:', error);
+    return null;
+  }
+};
+
+/**
  * Fetches a 5-day weather forecast for a given location.
  * @param location The city name to search for.
  * @param unit The unit system to use ('metric' for Celsius, 'imperial' for Fahrenheit).
@@ -108,6 +130,28 @@ export const getForecast = async (location: string, unit: 'metric' | 'imperial')
     return data;
   } catch (error) {
     console.error("Failed to fetch forecast:", error);
+    return null;
+  }
+};
+
+/**
+ * Fetches a 5-day weather forecast by geographic coordinates.
+ */
+export const getForecastByCoords = async (
+  lat: number,
+  lon: number,
+  unit: 'metric' | 'imperial'
+): Promise<ForecastData | null> => {
+  const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&units=${unit}&appid=${API_KEY}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch forecast by coords:', error);
     return null;
   }
 };
