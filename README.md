@@ -1,69 +1,67 @@
-# React + TypeScript + Vite
+# Task 4 – React Weather App (TypeScript + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple, fast weather dashboard built with React, TypeScript, and Vite. It supports current weather, a 5‑day forecast, saved locations, light/dark theme, and now automatically detects your current location on startup (with graceful fallbacks).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Auto-detect current location on app load (with permission prompt)
+- Search cities with suggestions and save favorite locations
+- Current conditions + 5‑day forecast
+- Unit toggle (°C/°F)
+- Theme toggle (light/dark)
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 18+ (recommended LTS)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting started
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1) Install dependencies
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```powershell
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2) Run the dev server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```powershell
+npm run dev
 ```
+
+Open the printed local URL (usually http://localhost:5173) in your browser.
+
+## Geolocation and permissions
+
+- On first load, the app will request access to your device location to fetch local weather automatically.
+- If you deny permission or your device can’t determine a position in time, the app falls back to a default city (London). You can always use the “My Location” button or search manually.
+- For best results, access the app over HTTPS and ensure location services are enabled for your browser.
+
+## API key
+
+This project uses the OpenWeather API. An example key is currently embedded for convenience in development code. For production use, replace it with your own key and move it to an environment variable or a secure server endpoint.
+
+## Scripts
+
+- npm run dev – Start the development server
+- npm run build – Type-check and build for production
+- npm run preview – Preview the production build locally
+- npm run lint – Lint the project
+
+## Troubleshooting
+
+- Location request timed out:
+  - Make sure browser location permissions are allowed for the site
+  - Try switching networks (Wi‑Fi vs mobile)
+  - Desktop devices without GPS can be slower; retry or search a city manually
+- CORS or fetch errors: ensure you have a stable internet connection
+
+## Project structure
+
+- src/components – UI components (CurrentWeather, Forecast, LocationSearch, etc.)
+- src/context – Global app state (theme, weather)
+- src/api – Requests to OpenWeather (current and forecast)
+- src/services – Geolocation utilities
+
+## License
+
+For learning and demo purposes.

@@ -7,6 +7,8 @@ import React, { useState, useEffect, createContext, useContext, type ReactNode }
 interface WeatherContextType {
   currentLocation: string;
   setCurrentLocation: (location: string) => void;
+  currentCoords: { lat: number; lon: number } | null;
+  setCurrentCoords: (coords: { lat: number; lon: number } | null) => void;
   savedLocations: string[];
   setSavedLocations: (locations: string[]) => void;
   unit: 'metric' | 'imperial';
@@ -44,6 +46,7 @@ interface WeatherProviderProps {
 export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) => {
   // State for the current location and a list of saved locations
   const [currentLocation, setCurrentLocation] = useState<string>('');
+  const [currentCoords, setCurrentCoords] = useState<{ lat: number; lon: number } | null>(null);
   const [savedLocations, setSavedLocations] = useState<string[]>([]);
   // State for the unit system (Celsius or Fahrenheit)
   const [unit, setUnit] = useState<'metric' | 'imperial'>('metric');
@@ -67,6 +70,8 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) =>
   const value = {
     currentLocation,
     setCurrentLocation,
+    currentCoords,
+    setCurrentCoords,
     savedLocations,
     setSavedLocations,
     unit,
