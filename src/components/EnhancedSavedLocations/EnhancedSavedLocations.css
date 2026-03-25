@@ -1,13 +1,186 @@
+/* ============================================================
+   EnhancedSavedLocations.css  —  matches new design system
+   ============================================================ */
+
 .enhanced-saved-locations {
+  width: 100%;
   background: var(--card-bg);
-  backdrop-filter: blur(15px);
-  border-radius: 30px;
-  padding: 2rem;
-  margin: 20px 0;
-  box-shadow: 0 20px 40px var(--shadow-color);
-  border: 3px solid var(--card-border);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  padding: 22px 24px 24px;
   position: relative;
   overflow: hidden;
+}
+
+.enhanced-saved-locations::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  animation: none;
+}
+
+@keyframes borderFlow { }
+
+.locations-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  position: relative;
+  z-index: 2;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+}
+
+.locations-title::before {
+  content: '🗺️';
+  font-size: 0.95rem;
+  display: inline;
+  margin-bottom: 0;
+}
+
+.no-locations {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-style: italic;
+  text-align: center;
+  padding: 18px;
+  background: rgba(148, 163, 184, 0.07);
+  border: 1px dashed var(--card-border);
+  border-radius: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.no-locations::before { display: none; }
+
+.locations-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.location-item {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.22);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  padding: 0;
+  gap: 0;
+  box-shadow: none;
+}
+
+.location-item::before { display: none; }
+
+.location-item:hover {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.location-item:hover::before { display: none; }
+
+.location-select-btn {
+  padding: 8px 4px 8px 14px;
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  transition: color 0.18s ease;
+}
+
+.location-select-btn::before { display: none; }
+
+.location-select-btn:hover {
+  color: var(--button-hover-bg);
+  background: transparent;
+  transform: none;
+}
+
+.location-select-btn:hover::before { display: none; }
+
+.location-delete-btn {
+  width: 26px;
+  height: 26px;
+  margin: 0 5px 0 2px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 3;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.location-delete-btn::before { display: none; }
+.location-delete-btn:hover::before { display: none; }
+
+.location-delete-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--error-color);
+  transform: scale(1.15);
+  box-shadow: none;
+}
+
+.location-delete-btn:active {
+  transform: scale(0.95);
+}
+
+/* Dark theme */
+[data-theme="dark"] .enhanced-saved-locations {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--card-border);
+  border: 1px solid var(--card-border);
+}
+
+[data-theme="dark"] .location-item {
+  background: rgba(56, 189, 248, 0.07);
+  border-color: rgba(56, 189, 248, 0.18);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .location-item:hover {
+  background: rgba(56, 189, 248, 0.14);
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+[data-theme="dark"] .no-locations {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--card-border);
 }
 
 .enhanced-saved-locations::before {
