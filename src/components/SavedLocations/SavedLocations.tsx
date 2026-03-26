@@ -8,14 +8,16 @@ import './SavedLocations.css';
  */
 const SavedLocations: React.FC = () => {
   // Use the WeatherContext to get the saved locations and the function to set the current location.
-  const { savedLocations, setCurrentLocation, setSavedLocations } = useWeather();
+  const { savedLocations, setCurrentLocation, setCurrentCoords, setSavedLocations } = useWeather();
 
   /**
    * Handles the click event on a saved location button.
-   * Sets the clicked location as the new current location.
+   * Sets the clicked location as the new current location and clears any
+   * stale coordinates so weather is fetched by city name.
    * @param location - The name of the city to set as the current location.
    */
   const handleSelectLocation = (location: string) => {
+    setCurrentCoords(null);
     setCurrentLocation(location);
   };
 

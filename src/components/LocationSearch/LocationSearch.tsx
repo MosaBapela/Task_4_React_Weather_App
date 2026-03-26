@@ -98,8 +98,8 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ onLocationSelect }) => 
       const locationData = await getCurrentLocation();
       const cityName = `${locationData.city}, ${locationData.country}`;
       
-      // Update the search query to show the detected location
-      setSearchQuery(cityName);
+      // Clear the search input so the debounce doesn't re-trigger suggestions
+      setSearchQuery('');
       
       // Select this location
       onLocationSelect(locationData.latitude, locationData.longitude, cityName);

@@ -101,7 +101,7 @@ const WeatherApp: React.FC = () => {
     };
 
     fetchWeatherData();
-  }, [currentLocation, unit, setCurrentLocation]);
+  }, [currentLocation, currentCoords, unit]);
 
   return (
     <div className="app">
@@ -141,7 +141,8 @@ const WeatherApp: React.FC = () => {
           {currentWeather && !loading && (
             <CurrentWeather 
               data={currentWeather}
-              unit={unit} 
+              unit={unit}
+              locationName={currentLocation}
             />
           )}
           

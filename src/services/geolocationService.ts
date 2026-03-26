@@ -16,18 +16,30 @@ export const getCurrentLocation = async (): Promise<GeolocationData> => {
     });
 
   const reverseGeocode = async (latitude: number, longitude: number) => {
+    // Use OpenStreetMap Nominatim for accurate local place names
     const response = await fetch(
-      `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=54d5aeff17af811f5ff3c152373f2183`
+      `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`,
+      { headers: { 'Accept-Language': 'en', 'User-Agent': 'WeatherApp/1.0' } }
     );
     if (!response.ok) {
       throw new Error('Failed to fetch location data');
     }
     const data = await response.json();
-    if (data && data.length > 0) {
-      return {
-        city: data[0].name as string,
-        country: data[0].country as string,
-      };
+    if (data && data.address) {
+      const addr = data.address;
+      // Pick the most specific available place name
+      const city: string =
+        addr.village ||
+        addr.suburb ||
+        addr.town ||
+        addr.city ||
+        addr.county ||
+        addr.state ||
+        data.display_name;
+      const country: string = addr.country_code
+        ? (addr.country_code as string).toUpperCase()
+        : addr.country || '';
+      return { city, country };
     }
     throw new Error('Unable to determine city from coordinates');
   };

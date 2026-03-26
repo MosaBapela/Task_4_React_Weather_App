@@ -6,10 +6,12 @@ import type { CurrentWeatherData } from '../../api/weatherService';
  * Interface for the props of the CurrentWeather component.
  * @param data - The current weather data object.
  * @param unit - The unit system ('metric' or 'imperial').
+ * @param locationName - Optional override for the displayed location name.
  */
 interface CurrentWeatherProps {
   data: CurrentWeatherData;
   unit: 'metric' | 'imperial';
+  locationName?: string;
 }
 
 /**
@@ -18,15 +20,19 @@ interface CurrentWeatherProps {
  * @param data - The CurrentWeatherData object containing the weather details.
  * @param unit - The unit system for temperature and wind speed.
  */
-const CurrentWeather: React.FC<CurrentWeatherProps> = ({ data, unit }) => {
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({ data, unit, locationName }) => {
   if (!data) return null;
 
   const tempUnit = unit === 'metric' ? '°C' : '°F';
   const windUnit = unit === 'metric' ? 'm/s' : 'mph';
 
+  // Use the app-resolved location name if provided, otherwise fall back to
+  // what the weather API returned (which may be a different nearby place)
+  const displayName = locationName || `${data.name}, ${data.sys.country}`;
+
   return (
     <div className="weather-card">
-      <h2 className="weather-card-title">{data.name}, {data.sys.country}</h2>
+      <h2 className="weather-card-title">{displayName}</h2>
       <div className="weather-card-header">
         <img
           src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
