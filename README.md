@@ -2,6 +2,10 @@
 
 A simple, fast weather dashboard built with React, TypeScript, and Vite. It supports current weather, a 5‑day forecast, saved locations, light/dark theme, and now automatically detects your current location on startup (with graceful fallbacks).
 
+## 🌐 Live Demo
+
+**Hosted project:** [https://task-4-react-weather-app.vercel.app/](https://task-4-react-weather-app.vercel.app/)
+
 ## Features
 
 - Auto-detect current location on app load (with permission prompt)
